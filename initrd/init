@@ -85,6 +85,7 @@ try_mount()
 }
 
 check_root()
+# Used at line 162
 {
 	if [ "`dirname $1`" = "/dev" ]; then
 		[ -e $1 ] || return 1
@@ -159,6 +160,7 @@ done
 cd /
 while :; do
 	for device in ${ROOT:-/dev/[hmnsv][dmrv][0-9a-z]*}; do
+	# Parse through every device available and check if for system squash image or default.prop file to locate root partition
 		check_root $device && break 2
 		mountpoint -q /mnt && umount /mnt
 	done
